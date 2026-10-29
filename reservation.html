@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve a Car - DriveEasy Car Rental</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            DriveEasy
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="reservation.html" class="active">Reservation</a></li>
+                <li><a href="pickup.html">Rent</a></li>
+                <li><a href="return.html">Return</a></li>
+                <li><a href="inspection.html">Inspection</a></li>
+                <li><a href="billing.html">Payment</a></li>
+                <li><a href="login-signup.html">Login / Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <h1 class="page-title">Reserve Your Vehicle</h1>
+
+        <form id="reservationForm">
+            <div class="two-column-grid">
+
+                <!-- Step 1: Vehicle & Schedule -->
+                <div class="card">
+                    <h2>1. Vehicle & Schedule</h2>
+                    
+                    <div class="form-group">
+                        <label for="car-select">Select Vehicle</label>
+                        <select id="car-select" onchange="calculatePrice()" required>
+                            <option value="" data-rate="0">-- Select a Car --</option>
+                            <option value="Economy Hatchback" data-rate="45">Economy Hatchback ($45/day)</option>
+                            <option value="Comfort Sedan" data-rate="65">Comfort Sedan ($65/day)</option>
+                            <option value="Family SUV" data-rate="85">Family SUV ($85/day)</option>
+                            <option value="Luxury Sedan" data-rate="120">Luxury Sedan ($120/day)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pickup-date">Pick-up Date</label>
+                        <input type="date" id="pickup-date" onchange="calculatePrice()" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="return-date">Return Date</label>
+                        <input type="date" id="return-date" onchange="calculatePrice()" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pickup-loc">Pick-up Location</label>
+                        <select id="pickup-loc" required>
+                            <option value="Main HQ Carpark (Orchard)">Main HQ Carpark (Orchard)</option>
+                            <option value="Downtown Hub Carpark (Marina)">Downtown Hub Carpark (Marina)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="return-loc">Return Location</label>
+                        <select id="return-loc" required>
+                            <option value="Main HQ Carpark (Orchard)">Main HQ Carpark (Orchard)</option>
+                            <option value="Downtown Hub Carpark (Marina)">Downtown Hub Carpark (Marina)</option>
+                        </select>
+                    </div>
+
+                    <!-- Price Calculator Box -->
+                    <div class="price-summary">
+                        <div class="price-row">
+                            <span>Daily Rate:</span>
+                            <span id="display-rate">$0 / day</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Rental Duration:</span>
+                            <span id="display-days">0 days</span>
+                        </div>
+                        <div class="price-row total">
+                            <span>Estimated Total:</span>
+                            <span id="display-total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Credit Card Hold -->
+                <div class="card">
+                    <h2>2. Credit Card Reservation Hold</h2>
+
+                    <div class="form-group">
+                        <label for="card-name">Cardholder Name</label>
+                        <input type="text" id="card-name" placeholder="Name as printed on card" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card-number">Credit Card Number</label>
+                        <input type="text" id="card-number" placeholder="1234 5678 9101 1121" maxlength="19" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="card-expiry">Expiry Date</label>
+                            <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-cvv">CVV</label>
+                            <input type="password" id="card-cvv" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Confirm Reservation</button>
+
+                    <!-- Alert Box -->
+                    <div id="confirmationBox" class="alert-box success">
+                        <h3>Reservation Successful!</h3>
+                        <p>Booking Ref: <strong id="booking-ref">AZ-0000</strong></p>
+                        <p>Present this reference at the AZoom office to collect your keys.</p>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h3>DriveEasy</h3>
+                <p>Your trusted partner for convenient car rental.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="reservation.html">Reservation</a></li>
+                    <li><a href="pickup.html">Rent</a></li>
+                    <li><a href="return.html">Return</a></li>
+                    <li><a href="billing.html">Payment</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <p>Facebook | Instagram | LinkedIn</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2026 DriveEasy Car Rental. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Price Calculation & Form Handling Script -->
+    <script>
+        function calculatePrice() {
+            const carSelect = document.getElementById('car-select');
+            const rate = parseFloat(carSelect.options[carSelect.selectedIndex].getAttribute('data-rate')) || 0;
+            
+            const pickupDateVal = document.getElementById('pickup-date').value;
+            const returnDateVal = document.getElementById('return-date').value;
+
+            document.getElementById('display-rate').innerText = '$' + rate + ' / day';
+
+            if (pickupDateVal && returnDateVal) {
+                const start = new Date(pickupDateVal);
+                const end = new Date(returnDateVal);
+                const diffTime = end - start;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays > 0) {
+                    const total = diffDays * rate;
+                    document.getElementById('display-days').innerText = diffDays + ' day(s)';
+                    document.getElementById('display-total').innerText = '$' + total.toFixed(2);
+                } else {
+                    document.getElementById('display-days').innerText = 'Invalid dates';
+                    document.getElementById('display-total').innerText = '$0.00';
+                }
+            }
+        }
+
+        document.getElementById('reservationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const randomRef = 'AZ-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('booking-ref').innerText = randomRef;
+            
+            const confirmationBox = document.getElementById('confirmationBox');
+            confirmationBox.style.display = 'block';
+            confirmationBox.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+</html>
