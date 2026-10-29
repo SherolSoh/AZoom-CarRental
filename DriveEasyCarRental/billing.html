@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Payment & Billing - DriveEasy Car Rental</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        @media print {
+            header, footer, nav, .submit-btn, .lookup-section {
+                display: none !important;
+            }
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #000 !important;
+            }
+            body {
+                background: #fff !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            DriveEasy
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="pickup.html">Rent</a></li>
+                <li><a href="return.html">Return</a></li>
+                <li><a href="inspection.html">Inspection</a></li>
+                <li><a href="billing.html" class="active">Payment</a></li>
+                <li><a href="login-signup.html">Login / Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <h1 class="page-title">Final Rental Bill & Payment</h1>
+
+        <!-- Step 1: Lookup Booking Invoice -->
+        <div class="card lookup-section" style="margin-bottom: 30px;">
+            <h2>1. Lookup Final Invoice</h2>
+            <form id="invoiceLookupForm">
+                <div class="form-row">
+                    <div class="form-group" style="flex: 2;">
+                        <label for="bill-booking-id">Booking Reference / Rental ID</label>
+                        <input type="text" id="bill-booking-id" placeholder="e.g. AZ-9821" value="AZ-9821" required>
+                    </div>
+                    <div class="form-group" style="flex: 1; align-self: flex-end;">
+                        <button type="submit" class="submit-btn" style="margin-top: 0;">Retrieve Bill</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 2: Itemized Statement & Payment Process -->
+        <div id="billingDetailsSection" class="two-column-grid">
+
+            <!-- Left Column: Itemized Cost Breakdown -->
+            <div class="card">
+                <h2>Itemized Bill Statement</h2>
+
+                <div style="margin-bottom: 15px; font-size: 0.95rem;">
+                    <p><strong>Customer Name:</strong> Sarah Tan</p>
+                    <p><strong>Vehicle Rented:</strong> Comfort Sedan (SKR 1234 A)</p>
+                    <p><strong>Rental Period:</strong> 3 Days (10 Oct 2026 - 13 Oct 2026)</p>
+                    <p><strong>Inspection Status:</strong> <span style="color: #dc2626; font-weight: bold;">Completed (Damages Reported)</span></p>
+                </div>
+
+                <div class="price-summary">
+                    <div class="price-row">
+                        <span>Base Rental Charge (3 Days @ $65/day):</span>
+                        <span>$195.00</span>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Car Park Drop-off Fee:</span>
+                        <span>$0.00</span>
+                    </div>
+
+                    <div class="price-row" style="color: #dc2626;">
+                        <span>Front Bumper Scratch Fee:</span>
+                        <span>$150.00</span>
+                    </div>
+
+                    <div class="price-row" style="color: #dc2626;">
+                        <span>Unfilled Fuel Penalty:</span>
+                        <span>$50.00</span>
+                    </div>
+
+                    <div class="price-row total">
+                        <span>Total Payable Amount:</span>
+                        <span>$395.00</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px; font-size: 0.85rem; color: #64748b;">
+                    <p>* Initial credit card reservation hold of $195.00 will be applied toward this total balance.</p>
+                </div>
+            </div>
+
+            <!-- Right Column: Final Card Settlement -->
+            <div class="card">
+                <h2>Payment Settlement</h2>
+
+                <form id="finalPaymentForm">
+                    <div class="form-group">
+                        <label for="pay-card-name">Cardholder Name</label>
+                        <input type="text" id="pay-card-name" value="Sarah Tan" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pay-card-number">Credit Card Number</label>
+                        <input type="text" id="pay-card-number" value="•••• •••• •••• 4242" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pay-card-expiry">Expiry Date</label>
+                            <input type="text" id="pay-card-expiry" value="12/28" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pay-card-cvv">CVV</label>
+                            <input type="password" id="pay-card-cvv" placeholder="123" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Pay Remaining Balance ($395.00)</button>
+
+                    <!-- Receipt Alert & Print Trigger -->
+                    <div id="paymentSuccessBox" class="alert-box success">
+                        <h3>Payment Completed Successfully!</h3>
+                        <p>Receipt ID: <strong>REC-2026-9821</strong></p>
+                        <p>Thank you for choosing AZoom / DriveEasy Car Rental.</p>
+                        <button type="button" class="submit-btn" onclick="window.print()" style="background-color: #0f172a; margin-top: 12px;">Print Official Receipt</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h3>DriveEasy</h3>
+                <p>Your trusted partner for convenient car rental.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="reservation.html">Reservation</a></li>
+                    <li><a href="pickup.html">Rent</a></li>
+                    <li><a href="return.html">Return</a></li>
+                    <li><a href="billing.html">Payment</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <p>Facebook | Instagram | LinkedIn</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2026 DriveEasy Car Rental. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Payment Execution Script -->
+    <script>
+        document.getElementById('invoiceLookupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            document.getElementById('billingDetailsSection').style.display = 'grid';
+        });
+
+        document.getElementById('finalPaymentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const successBox = document.getElementById('paymentSuccessBox');
+            successBox.style.display = 'block';
+            successBox.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+</html>
