@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register - AZoom Car Rental</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            AZoom
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="pickup.html">Rent</a></li>
+                <li><a href="return.html">Return</a></li>
+                <li><a href="inspection.html">Inspection</a></li>
+                <li><a href="billing.html">Payment</a></li>
+                <li><a href="login-signup.html" class="active">Login / Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <section class="auth-container">
+
+            <!-- Switcher Tabs -->
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" onclick="switchTab('login')">Customer Login</button>
+                <button class="auth-tab-btn" onclick="switchTab('register')">Register</button>
+                <button class="auth-tab-btn" onclick="switchTab('employee')">Staff Portal</button>
+            </div>
+
+            <!-- 1. CUSTOMER LOGIN FORM -->
+            <form id="loginForm" class="auth-form active" action="#" method="POST">
+                <h2>Customer Login</h2>
+
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Login</button>
+
+                <div class="form-footer">
+                    <p>Forgot password? <a href="#">Reset here</a></p>
+                    <p>Don't have an account? <a href="javascript:void(0)" onclick="switchTab('register')">Register now</a></p>
+                </div>
+            </form>
+
+            <!-- 2. CUSTOMER REGISTRATION FORM -->
+            <form id="registerForm" class="auth-form" action="#" method="POST">
+                <h2>Create an Account</h2>
+
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" name="fullname" placeholder="e.g. Sarah Tan" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" name="email" placeholder="sarah@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-phone">Phone Number</label>
+                    <input type="tel" id="reg-phone" name="phone" placeholder="+65 9123 4567" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" name="password" placeholder="Min. 8 characters" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-confirm-password">Confirm Password</label>
+                        <input type="password" id="reg-confirm-password" name="confirm_password" placeholder="Re-enter password" required>
+                    </div>
+                </div>
+
+                <!-- Required driving license details for rental eligibility -->
+                <div class="form-group">
+                    <label for="reg-license">Driving License Number</label>
+                    <input type="text" id="reg-license" name="license_number" placeholder="S1234567A" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Create Customer Account</button>
+
+                <div class="form-footer">
+                    <p>Already have an account? <a href="javascript:void(0)" onclick="switchTab('login')">Login here</a></p>
+                </div>
+            </form>
+
+            <!-- 3. EMPLOYEE / INSPECTOR LOGIN FORM -->
+            <form id="employeeForm" class="auth-form" action="#" method="POST">
+                <h2>Employee Portal</h2>
+                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 16px;">
+                    For AZoom staff inspecting returned cars and managing rental statuses.
+                </p>
+
+                <div class="form-group">
+                    <label for="emp-id">Employee ID</label>
+                    <input type="text" id="emp-id" name="employee_id" placeholder="e.g. EMP-1042" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emp-password">Password</label>
+                    <input type="password" id="emp-password" name="password" placeholder="Enter password" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Staff Login</button>
+            </form>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h3>AZoom</h3>
+                <p>Your trusted partner for convenient car rental.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="reservation.html">Reservation</a></li>
+                    <li><a href="pickup.html">Rent</a></li>
+                    <li><a href="return.html">Return</a></li>
+                    <li><a href="billing.html">Payment</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <p>Facebook | Instagram | LinkedIn</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2026 AZoom Car Rental. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Tab Switcher Script -->
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
+            document.querySelectorAll('.auth-tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            if (tab === 'login') {
+                document.getElementById('loginForm').classList.add('active');
+                document.querySelectorAll('.auth-tab-btn')[0].classList.add('active');
+            } else if (tab === 'register') {
+                document.getElementById('registerForm').classList.add('active');
+                document.querySelectorAll('.auth-tab-btn')[1].classList.add('active');
+            } else if (tab === 'employee') {
+                document.getElementById('employeeForm').classList.add('active');
+                document.querySelectorAll('.auth-tab-btn')[2].classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>

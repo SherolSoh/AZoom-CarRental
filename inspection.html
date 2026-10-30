@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Inspection Portal - AZoom Car Rental</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            AZoom
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="pickup.html">Rent</a></li>
+                <li><a href="return.html">Return</a></li>
+                <li><a href="inspection.html" class="active">Inspection</a></li>
+                <li><a href="billing.html">Payment</a></li>
+                <li><a href="login-signup.html">Login / Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <h1 class="page-title">Returned Car Inspection Portal (Staff Only)</h1>
+
+        <div class="two-column-grid">
+
+            <!-- Left: Select Returned Car & Inspection Checklist -->
+            <div class="card">
+                <h2>1. Select Returned Vehicle</h2>
+                
+                <form id="inspectionForm">
+                    <div class="form-group">
+                        <label for="inspect-booking">Select Pending Return</label>
+                        <select id="inspect-booking" onchange="loadInspectionData()" required>
+                            <option value="">-- Select Pending Inspection --</option>
+                            <option value="AZ-9821" data-car="Comfort Sedan (SKR 1234 A)" data-cust="Sarah Tan" data-loc="Main HQ Carpark (Orchard)">AZ-9821 - Comfort Sedan (Sarah Tan)</option>
+                            <option value="AZ-4102" data-car="Family SUV (SGP 8888 B)" data-cust="David Lim" data-loc="Main HQ Carpark (Orchard)">AZ-4102 - Family SUV (David Lim)</option>
+                            <option value="AZ-3301" data-car="Economy Hatchback (SLR 5542 C)" data-cust="Michael Lee" data-loc="Main HQ Carpark (Orchard)">AZ-3301 - Economy Hatchback (Michael Lee)</option>
+                        </select>
+                    </div>
+
+                    <!-- Auto-filled Inspection Target Info -->
+                    <div id="targetDetails" class="price-summary" style="display: none; margin-bottom: 20px;">
+                        <div class="price-row">
+                            <span>Vehicle:</span>
+                            <strong id="info-car">-</strong>
+                        </div>
+                        <div class="price-row">
+                            <span>Renter:</span>
+                            <span id="info-cust">-</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Return Location:</span>
+                            <span id="info-loc">-</span>
+                        </div>
+                    </div>
+
+                    <h2>2. Damage Inspection Checklist</h2>
+
+                    <div class="form-group">
+                        <label>Exterior & Interior Condition</label>
+                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 5px;">
+                            <label><input type="checkbox" id="chk-front" onchange="calculateDamage()"> Front Bumper / Headlights Scratched</label>
+                            <label><input type="checkbox" id="chk-rear" onchange="calculateDamage()"> Rear Bumper Dent</label>
+                            <label><input type="checkbox" id="chk-wheels" onchange="calculateDamage()"> Alloy Wheel Rim Scuffed</label>
+                            <label><input type="checkbox" id="chk-interior" onchange="calculateDamage()"> Interior Stains / Cleaning Required</label>
+                            <label><input type="checkbox" id="chk-fuel" onchange="calculateDamage()"> Unfilled Fuel Tank (Penalty)</label>
+                        </div>
+                    </div>
+
+            </div>
+
+            <!-- Right: Assessment Summary & Status Update -->
+            <div class="card">
+                <h2>3. Damage Fee Assessment</h2>
+
+                <div class="form-group">
+                    <label for="inspector-id">Inspecting Employee ID</label>
+                    <input type="text" id="inspector-id" value="EMP-1042 (AZoom Inspector)" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="damage-description">Damage Details & Remarks</label>
+                    <textarea id="damage-description" rows="3" placeholder="No damages found if left unchecked."></textarea>
+                </div>
+
+                <!-- Fee Summary -->
+                <div class="price-summary">
+                    <div class="price-row">
+                        <span>Base Condition Assessment:</span>
+                        <span id="fee-base">Passed (No Damage)</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>Calculated Damage / Penalty Fee:</span>
+                        <span id="display-damage-fee">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="car-status-select">Update Vehicle Status</label>
+                    <select id="car-status-select" required>
+                        <option value="Inspected - No Damage">Inspected - No Damage (Ready for Rent)</option>
+                        <option value="Inspected - Damage Reported">Inspected - Damage Charges Applied</option>
+                        <option value="Requires Maintenance">Send to Workshop / Maintenance</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Complete Inspection & Finalize Charges</button>
+
+                <!-- Success Box -->
+                <div id="inspectionSuccessBox" class="alert-box success">
+                    <h3>Inspection Completed!</h3>
+                    <p>Status updated successfully. Final bill generated for customer.</p>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h3>AZoom</h3>
+                <p>Your trusted partner for convenient car rental.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="reservation.html">Reservation</a></li>
+                    <li><a href="pickup.html">Rent</a></li>
+                    <li><a href="return.html">Return</a></li>
+                    <li><a href="billing.html">Payment</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <p>Facebook | Instagram | LinkedIn</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2026 AZoom Car Rental. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Dynamic Inspection & Damage Fee Calculation Script -->
+    <script>
+        function loadInspectionData() {
+            const select = document.getElementById('inspect-booking');
+            const selectedOpt = select.options[select.selectedIndex];
+            
+            if (select.value) {
+                document.getElementById('info-car').innerText = selectedOpt.getAttribute('data-car');
+                document.getElementById('info-cust').innerText = selectedOpt.getAttribute('data-cust');
+                document.getElementById('info-loc').innerText = selectedOpt.getAttribute('data-loc');
+                document.getElementById('targetDetails').style.display = 'block';
+            } else {
+                document.getElementById('targetDetails').style.display = 'none';
+            }
+        }
+
+        function calculateDamage() {
+            let totalFee = 0;
+            let notes = [];
+
+            if (document.getElementById('chk-front').checked) {
+                totalFee += 150;
+                notes.push("Front Bumper Scratch ($150)");
+            }
+            if (document.getElementById('chk-rear').checked) {
+                totalFee += 200;
+                notes.push("Rear Bumper Dent ($200)");
+            }
+            if (document.getElementById('chk-wheels').checked) {
+                totalFee += 100;
+                notes.push("Alloy Wheel Rim Scuff ($100)");
+            }
+            if (document.getElementById('chk-interior').checked) {
+                totalFee += 80;
+                notes.push("Interior Deep Clean Fee ($80)");
+            }
+            if (document.getElementById('chk-fuel').checked) {
+                totalFee += 50;
+                notes.push("Unfilled Fuel Penalty ($50)");
+            }
+
+            document.getElementById('display-damage-fee').innerText = '$' + totalFee.toFixed(2);
+            document.getElementById('damage-description').value = notes.length > 0 ? notes.join(", ") : "No damages observed during inspection.";
+            
+            const statusSelect = document.getElementById('car-status-select');
+            if (totalFee > 0) {
+                statusSelect.value = "Inspected - Damage Reported";
+            } else {
+                statusSelect.value = "Inspected - No Damage";
+            }
+        }
+
+        document.getElementById('inspectionForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const successBox = document.getElementById('inspectionSuccessBox');
+            successBox.style.display = 'block';
+            successBox.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+</html>

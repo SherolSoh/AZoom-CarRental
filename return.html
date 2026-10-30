@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Vehicle - AZoom Car Rental</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            AZoom
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="pickup.html">Rent</a></li>
+                <li><a href="return.html" class="active">Return</a></li>
+                <li><a href="inspection.html">Inspection</a></li>
+                <li><a href="billing.html">Payment</a></li>
+                <li><a href="login-signup.html">Login / Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <h1 class="page-title">Return Vehicle at Car Park</h1>
+
+        <div class="two-column-grid">
+
+            <!-- Left: Drop-off Location & Time -->
+            <div class="card">
+                <h2>1. Designated Drop-off Location</h2>
+                
+                <form id="returnForm">
+                    <div class="form-group">
+                        <label for="return-booking-id">Booking Reference / Rental ID</label>
+                        <input type="text" id="return-booking-id" placeholder="e.g. AZ-9821" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="car-park-select">Designated Car Park</label>
+                        <select id="car-park-select" required>
+                            <option value="">-- Select Drop-off Car Park --</option>
+                            <option value="Main HQ Carpark (Orchard)">Main HQ Carpark (Orchard)</option>
+                            <option value="Downtown Hub Carpark (Marina)">Downtown Hub Carpark (Marina)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parking-lot">Parking Lot Number</label>
+                        <input type="text" id="parking-lot" placeholder="e.g. Lot #A-42" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="return-datetime">Date & Time of Return</label>
+                        <input type="datetime-local" id="return-datetime" required>
+                    </div>
+            </div>
+
+            <!-- Right: Odometer, Fuel & Lock Confirmation -->
+            <div class="card">
+                <h2>2. Vehicle Status & Key Lock</h2>
+
+                <div class="form-group">
+                    <label for="odometer-in">Final Odometer Reading (km)</label>
+                    <input type="number" id="odometer-in" placeholder="e.g. 45480" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fuel-in">Returned Fuel Level</label>
+                    <select id="fuel-in" required>
+                        <option value="100%">100% Full</option>
+                        <option value="85%">85%</option>
+                        <option value="50%">50%</option>
+                        <option value="25%">25% or lower</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="return-notes">General Remarks / Notes</label>
+                    <textarea id="return-notes" rows="3" placeholder="Specify any issues encountered during rental..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="lock-check" required> Vehicle is locked and key deposited in key drop box
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Return Confirmation</button>
+
+                <!-- Alert Notification Box -->
+                <div id="returnSuccessBox" class="alert-box success">
+                    <h3>Vehicle Returned Successfully!</h3>
+                    <p>Status updated to: <strong style="color: #2563eb;">Returned / Pending Inspection</strong></p>
+                    <p>A AZoom employee will inspect the car shortly before your final statement is generated.</p>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h3>AZoom</h3>
+                <p>Your trusted partner for convenient car rental.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="reservation.html">Reservation</a></li>
+                    <li><a href="pickup.html">Rent</a></li>
+                    <li><a href="return.html">Return</a></li>
+                    <li><a href="billing.html">Payment</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <p>Facebook | Instagram | LinkedIn</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2026 AZoom Car Rental. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Return Submission Script -->
+    <script>
+        document.getElementById('returnForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const successBox = document.getElementById('returnSuccessBox');
+            successBox.style.display = 'block';
+            successBox.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+</html>
